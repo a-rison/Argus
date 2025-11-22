@@ -12,17 +12,17 @@ Argus operates on a **Manager-Worker** architecture. The Manager (API) talks to 
 
 ```mermaid
 graph TD
-    Client[Web/Mobile Client] -->|REST API| Manager[Argus Manager (FastAPI)]
+    Client["Web/Mobile Client"] -->|REST API| Manager["Argus Manager (FastAPI)"]
     
-    subgraph Kubernetes Cluster
-        Manager -->|K8s Client| ControlPlane[K8s Control Plane]
+    subgraph K8s_Cluster ["Kubernetes Cluster"]
+        Manager -->|"K8s Client"| ControlPlane["K8s Control Plane"]
         
-        ControlPlane -->|Spawns| PodA[📷 Detection Worker A]
-        ControlPlane -->|Spawns| PodB[📷 Detection Worker B]
-        ControlPlane -->|Spawns| JobC[⚙️ Batch CronJob]
+        ControlPlane -->|Spawns| PodA["📷 Detection Worker A"]
+        ControlPlane -->|Spawns| PodB["📷 Detection Worker B"]
+        ControlPlane -->|Spawns| JobC["⚙️ Batch CronJob"]
         
-        PodA -->|RTSP| Cam1((Camera 1))
-        PodB -->|RTSP| Cam2((Camera 2))
+        PodA -->|RTSP| Cam1(("Camera 1"))
+        PodB -->|RTSP| Cam2(("Camera 2"))
         
-        PodA -->|Inference Data| DB[(MongoDB / Timescale)]
+        PodA -->|"Inference Data"| DB[("MongoDB / Timescale")]
     end
