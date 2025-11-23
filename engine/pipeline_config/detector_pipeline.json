@@ -1,0 +1,31 @@
+{
+  "pipeline_name": "human_detector_pipeline",
+  "description": "Detects humans, tracks them, calculates zone logic, and saves to MongoDB.",
+  "modules": [
+    {
+      "name": "HumanDetector",
+      "module_path": "src.core.think.machine_learning.computer_vision.detector",
+      "class_name": "Detector",
+      "config": {
+        "model_path": "src/models/Iskcon_head_detection_yolov8m_15_aug.pt",
+        "tracker_path": "src/configs/machine_learning/computer_vision/tracker/botsort_with_reid.yaml",
+        "device": "cuda:0",
+        "conf": 0.6,
+        "class_ids": [0, 1],
+        "plot": true,
+        "target_fps": 5,
+        "security_enabled": true,
+        "save_raw_video": true
+      }
+    },
+    {
+      "name": "DatabaseWriter",
+      "module_path": "src.database.metadata_handler",
+      "class_name": "MetadataHandler",
+      "config": {
+        "buffer_size": 50, 
+        "flush_interval": 2
+      }
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+# This is a template. We will replace the '{{...}}' values in Python.
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{SERVICE_NAME}}-aggregator
+  namespace: default
+spec:
+  schedule: "*/1 * * * *" # Run every minute
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: {{SERVICE_NAME}}-aggregator-container
+            image: {{IMAGE_NAME}}
+            env:
+            - name: SERVICE_ID
+              value: "{{SERVICE_ID}}"
+            - name: MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: sentinel-secrets
+                  key: MONGODB_URI
+          restartPolicy: OnFailure
+      backoffLimit: 1
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1

@@ -1,0 +1,28 @@
+services:
+  sentinel-inference-backend:
+    container_name: ambient-machine-image-1
+    user: root
+    build:
+      context: .
+      dockerfile: dockerfile_gst
+      args:
+        CUDA_ARCH_BIN: "8.6"     # passes through to your Dockerfile if used
+    gpus: "all"                  # compose (non-Swarm) way to request NVIDIA runtime
+    network_mode: host
+    # ports:                     
+    #   - "9990:9990"
+
+    environment:
+      PYTHONPATH: "/app:${PYTHONPATH:-}"
+      GI_TYPELIB_PATH: "/usr/lib/x86_64-linux-gnu/girepository-1.0"
+      MPLCONFIGDIR: "/tmp/matplotlib"
+      YOLO_CONFIG_DIR: "/tmp/ultralytics"
+
+    tty: true
+    restart: unless-stopped
+    shm_size: "2g"
+
+    volumes:
+      - ./results/:/app/results
+      - ./logs/:/app/logs
+      - ./src/:/app/src/

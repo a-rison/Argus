@@ -1,0 +1,26 @@
+# This is a template. Python will fill in the blanks.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: camera-detection-PLACEHOLDER    # Python will change this
+  labels:
+    app: camera-detection-PLACEHOLDER   # Python will change this
+    camera_id: "PLACEHOLDER"            # Python will add this
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: camera-detection-PLACEHOLDER # Python will change this
+  template:
+    metadata:
+      labels:
+        app: camera-detection-PLACEHOLDER # Python will change this
+    spec:
+      containers:
+      - name: detection-container
+        image: your-org/your-detection-image:latest  # <-- IMPORTANT: Change this!
+        imagePullPolicy: Always
+        env:
+        - name: DATABASE_URL
+          value: "mongodb://your-db-url"
+        # Python will add RTSP_URL and CAMERA_ID here

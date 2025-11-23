@@ -1,0 +1,107 @@
+# ---- PyTorch (CUDA 12.1 wheels) ----
+--extra-index-url https://download.pytorch.org/whl/cu121
+torch==2.2.2+cu121
+torchvision==0.17.2+cu121
+# Triton is bundled for this torch; omit explicit triton pin
+
+# ---- Core scientific / CV / ML ----
+numpy==1.26.4
+scipy==1.14.0
+pandas==2.2.2
+matplotlib==3.9.1.post1
+seaborn==0.13.2
+scikit-learn==1.5.1
+opencv-python==4.10.0.84; platform_system=="Windows"  # guard: never installs in Linux image where you built OpenCV from source
+# (on Linux, OpenCV is from your builder stage; no wheel needed)
+
+# ---- ONNX / inference ----
+onnx==1.18.0
+onnxruntime-gpu==1.22.0
+onnxsim==0.4.36
+safetensors==0.6.2
+
+# ---- DL / vision extras ----
+ultralytics==8.3.178
+ultralytics-thop==2.0.0
+faster-coco-eval==1.6.7
+pycocotools==2.0.10
+facenet-pytorch==2.6.0
+supervision==0.26.1
+imageio==2.34.2
+pillow==10.2.0
+tqdm==4.66.5
+natsort==8.4.0
+shapely==2.0.5
+
+# ---- Transformers stack ----
+transformers==4.55.1
+tokenizers==0.21.4
+fsspec==2024.6.1
+protobuf==4.25.8
+absl-py==2.3.1
+markdown==3.8.2
+tensorboard==2.20.0
+tensorboard-data-server==0.7.2
+
+# ---- FastAPI backend ----
+fastapi==0.112.0
+uvicorn==0.30.5
+classy-fastapi==0.6.1
+anyio==4.4.0
+starlette==0.37.2
+pydantic==2.8.2
+pydantic_core==2.20.1
+python-multipart==0.0.9
+Jinja2==3.1.4
+
+# ---- Messaging / sockets (optional for your app) ----
+bidict==0.23.1
+python-socketio==5.11.3
+python-engineio==4.9.1
+simple-websocket==1.0.0
+wsproto==1.2.0
+
+# ---- Azure / storage / cloud utils ----
+azure-core==1.35.0
+azure-storage-blob==12.26.0
+backoff==2.2.1
+requests==2.32.3
+urllib3==2.2.2
+certifi==2024.7.4
+idna==3.7
+charset-normalizer==3.3.2
+
+# ---- Auth / crypto ----
+bcrypt==3.2.0
+passlib==1.7.4
+python-jose==3.3.0
+cryptography==45.0.6
+PyJWT==2.3.0
+
+# ---- Databases / IO ----
+pymongo==4.8.0
+mongoengine==0.28.2
+simplejson==3.20.1
+PyYAML==6.0.2
+
+# ---- Utilities ----
+python-dotenv==1.1.1
+packaging==25.0
+filelock==3.15.4
+coloredlogs==15.0.1
+humanfriendly==10.0
+regex==2025.7.34
+rich==14.1.0
+click==8.1.7
+colorama==0.4.4
+joblib==1.4.2
+psutil==7.0.0
+dnspython==2.6.1
+omegaconf==2.3.0
+nvidia-ml-py==12.575.51  # for pynvml-style GPU queries
+pynvml==12.0.0
+
+# ---- Time / TZ ----
+pytz==2024.1
+tzdata==2024.1
+tzlocal==5.3.1
